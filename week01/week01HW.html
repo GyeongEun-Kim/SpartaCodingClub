@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <title>죠르디 구매 홈페이지</title>
+</head>
+
+
+<title>죠르디 구매 사이트</title>
+
+<style>
+    .back {
+        width: 300px;
+        height: 300px;
+        background-size: 300px 300px;
+        background-image: url("https://static.smalljoys.me/2019/10/img_5da60c7c63d4a.png");
+        background-position: center;
+        margin: auto;
+
+    }
+
+    .whole {
+        font-family: 'Gaegu', cursive;
+        text-align: center;
+    }
+
+    .box {
+        padding-bottom: 10px;
+        width: 500px;
+        margin: 0px auto;
+    }
+    .jor {
+        color:blue;
+
+
+    }
+
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Gaegu&display=swap" rel="stylesheet">
+
+<script>
+    function buy() {
+        let name=$('.form-control').val()
+        let num=$('.custom-select').val()
+        alert(name+'님, 죠르디 '+num+'마리 구매가 완료되었습니다');
+        $('.form-control').val('');
+        $('.custom-select').val('');
+
+    }
+
+    $(document).ready(function () {
+        //alert('다 로딩됐다!')
+        $.ajax({
+            type: "GET",
+            url: "https://api.manana.kr/exchange/rate.json",
+            data: {},
+            success: function (response) {
+                let exchange = response[1]['rate']
+                let temp_html = ` <div class="jor"> <p>달러-원 환율: ${exchange}</p>
+    </div>`
+
+                $('#jor').append(temp_html)
+            }
+        })
+
+    });// 여기에 환율 API Ajax 요청을 하면 되겠죠?
+
+</script>
+</head>
+<body>
+<div class="whole">
+    <div class="back">
+    </div>
+
+    <h1 class>죠르디 <span style="font-size:23px"> 가격 : 1,000,000원 / 마리</span></h1>
+    <h6>죠르디는 운석과의 충돌로 떠내려 온 빙하에서 깨어났어요.</h6>
+    <h6>다재다능했던 과거를 뒤로한 채, 안정적인 직장에 취업을 꿈꾸며 단기알바생으로 열심히 살고 있답니다.</h6>
+    <h6>이런 죠르디를 데려가실 분을 구해요</h6>
+    <div id="jor">
+
+    </div>
+
+    <div class="box">
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">주문자 이름</span></div>
+            <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">마리수</label>
+            </div>
+            <select class="custom-select" id="inputGroupSelect01">
+                <option selected>--몇 마리인지 선택하세요--</option>
+                <option value="1">1마리</option>
+                <option value="2">2마리</option>
+                <option value="3">3마리</option>
+            </select>
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">주소</span>
+            </div>
+            <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">전화번호</span>
+            </div>
+            <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+
+
+    </div>
+
+
+    <a onclick="buy()" class="btn btn-success" href="#" role="button">구매하기</a>
+
+
+</div>
+</body>
+</html>
